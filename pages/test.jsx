@@ -78,14 +78,14 @@ export default function Test({ data2 }) {
   const onClick = (user_pk, nickname, tablecolor, total_visitor) => {
     router.push(
       {
-        pathname: `/caketables/${user_pk}`,
+        pathname: `/caketables`,
         query: {
           nickname,
           tablecolor,
           total_visitor
         },
       },
-      `/caketables/${user_pk}`
+      `/caketables`
     );
   };
   return (

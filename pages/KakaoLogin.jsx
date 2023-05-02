@@ -10,15 +10,11 @@ const KakaoLogin = () => {
     if (refresh && access) {
       sessionStorage.setItem("refreshToken", refresh);
       sessionStorage.setItem("accessToken", access);
-      router.push("/Useruse");  // 로그인 후 원하는 페이지로 변경
+      router.push("/Useruse"); // 로그인 후 원하는 페이지로 변경
     }
   }, [refresh, access, router]);
 
-  return (
-    <div>
-      {/* <h1>카카오 로그인 중...</h1> */}
-    </div>
-  );
+  return <div>{/* <h1>카카오 로그인 중...</h1> */}</div>;
 };
 
 export default KakaoLogin;

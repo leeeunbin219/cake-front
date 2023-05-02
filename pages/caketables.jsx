@@ -6,25 +6,20 @@ import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../pages/components/Sidebar";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 
 export default function Main() {
-  const router = useRouter();
-
-  const copyURL = async () => {
-    try {
-      const currentUrl = window.location.href;
-      await navigator.clipboard.writeText(currentUrl);
-      alert("링크가 복사되었습니다.");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [nickname, setNickname] = useState("");
+  // const [user, setUser] = useState({ nickname: "사용자" });
+  // const [count, setCount] = useState({ visitor: 0 });
+  useEffect(() => {
+    const savedNickname = sessionStorage.getItem("nickname");
+    setNickname(savedNickname);
+  }, []);
 
   return (
     <div className="main_container">
       <Sidebar />
-      <p className="main_text">님의 케이크</p>
+      <p className="main_text">{nickname}님의 케이크</p>
       <p className="main_text">명이 축하메세지를 보냈습니다</p>
       <div>
         <Image src={Caketable} alt="caketableimg" width={450} height={400} />
@@ -38,9 +33,6 @@ export default function Main() {
         <Link href="/Useruse">
           <button className="main_btn">내 케이크 만들기</button>
         </Link>
-        <button className="main_btn" onClick={copyURL}>
-          내 케이크 공유하기
-        </button>
       </div>
       <style jsx>{main}</style>
     </div>

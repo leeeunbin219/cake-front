@@ -6,16 +6,18 @@ import { createGlobalStyle } from "styled-components";
 import css from "styled-jsx/css";
 import Sidebar from "pages/components/Sidebar.jsx";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const getToken = () => {
   return sessionStorage.getItem("accessToken");
 };
 
 export default function Useruse() {
+  const router = useRouter();
+
   const [tablecolor, setTableColor] = useState("#FFFFFF");
   const [nickname, setNickname] = useState("");
   const [token, setToken] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
     setToken(getToken());
@@ -30,6 +32,7 @@ export default function Useruse() {
     document.getElementById("image-container").style.backgroundColor =
       newColor.hex;
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -39,54 +42,27 @@ export default function Useruse() {
       return;
     }
 
-    fetch(`http://127.0.0.1:8001/api/caketables/new/`, {
-      method: "GET",
+    fetch(`https://manage.neokkukae.store/api/caketables/new/`, {
+      method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify({
-      //   nickname: nickname,
-      //   total_visitor: total_visitor,
-      // }),
+      body: JSON.stringify({
+        nickname: nickname,
+        tablecolor: tablecolor,
+      }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("서버에서 에러가 발생했습니다.");
+          throw new Error("케이크는 하나만 생성이 가능합니다.");
         }
         return response.json();
       })
       .then((data) => {
-        if (data.exist) {
-          // 이미 생성된 테이블이 있다면
-          alert("이미 케이크 테이블이 생성되어 있습니다."); // alert를 띄웁니다.
-        } else {
-          // 생성된 테이블이 없다면
-          // 새로운 테이블을 생성합니다.
-          fetch(`http://127.0.0.1:8001/api/caketables/new/`, {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              nickname: nickname,
-              tablecolor: tablecolor,
-            }),
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("케이크는 하나만 생성이 가능합니다.");
-              }
-              return response.json();
-            })
-            .then((data) => {
-              console.log(data);
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
-        }
+        const { owner } = data;
+        router.push(`/caketables/${owner}`);
+        console.log(data, owner, 121212);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -121,7 +97,6 @@ export default function Useruse() {
             <Image src={cakeimg} width={450} />
           </div>
         </div>
-
         <button type="submit" className="useruse_submit_button font">
           만들기
         </button>
@@ -144,7 +119,7 @@ const Global = createGlobalStyle`
 }
 .chrome-picker:nth-child(1){
   height:100px;
-
+  
 }
 .hue-horizontal {
   visibility: visible;
@@ -213,4 +188,3 @@ const useruse = css`
     background-color: #f073cd;
   }
 `;
-

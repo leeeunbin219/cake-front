@@ -35,14 +35,6 @@ export default function Login() {
               카카오 로그인
             </div>
           </button>
-        <Link href="/components/Email_login">
-          <button className="login_email_btn loginbtn">
-            <div className="login_text_box">
-              <FontAwesomeIcon icon={faEnvelope} />
-              이메일 로그인
-            </div>
-          </button>
-        </Link>
       </div>
       <style jsx>{login}</style>
     </div>
@@ -95,12 +87,9 @@ const login = css`
     font-size: 20px;
     cursor: pointer;
     font-family: "Bazzi";
-  }
-  .login_kakao_btn {
     background-color: yellow;
     margin-bottom: 10px;
   }
-  .login_email_btn {
-    background-color: white;
-  }
+
+
 `;
