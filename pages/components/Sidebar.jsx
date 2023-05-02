@@ -1,5 +1,5 @@
 import css from "styled-jsx/css";
-import Footer from "../components/Footer";
+import Footer from "./Footer";
 import Link from "next/link";
 
 export default function Sidebar() {
@@ -33,7 +33,7 @@ export default function Sidebar() {
 }
 
 const sidebar = css`
- @font-face {
+  @font-face {
     font-family: "Bazzi";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
       format("woff");
@@ -42,7 +42,6 @@ const sidebar = css`
   }
   .sidebar_container {
     font-family: "Bazzi";
-
   }
   .sidebar_menuToggle {
     display: block;
@@ -121,7 +120,7 @@ const sidebar = css`
 
   .sidebar_menu {
     position: absolute;
-    width: 330px;
+    width: 240px;
     height: calc(100vh + 43px);
     margin: -100px 0 0 -50px;
     padding: 50px;

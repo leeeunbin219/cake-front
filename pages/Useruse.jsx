@@ -6,8 +6,8 @@ import { createGlobalStyle } from "styled-components";
 import css from "styled-jsx/css";
 import Sidebar from "pages/components/Sidebar.jsx";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
+//토큰
 const getToken = () => {
   return sessionStorage.getItem("accessToken");
 };
@@ -19,6 +19,7 @@ export default function Useruse() {
   const [nickname, setNickname] = useState("");
   const [token, setToken] = useState("");
 
+  //토큰
   useEffect(() => {
     setToken(getToken());
   }, []);
@@ -27,6 +28,7 @@ export default function Useruse() {
     return token !== "";
   };
 
+  //색선택
   const handleChange = (newColor) => {
     setTableColor(newColor.hex);
     document.getElementById("image-container").style.backgroundColor =
@@ -106,6 +108,7 @@ export default function Useruse() {
   );
 }
 
+//react-color custom
 const Global = createGlobalStyle`
 .flexbox-fix:last-child {
   visibility: hidden;
@@ -153,7 +156,7 @@ const useruse = css`
     transform: translate(-50%, -50%);
   }
   .useruse_nickname_container {
-    margin-top: 7vh;
+    margin-top: 5vh;
   }
   .useruse_name {
     font-size: 35px;
@@ -183,7 +186,7 @@ const useruse = css`
     height: 35px;
     width: 90px;
     font-size: 20px;
-    margin-top: 120px;
+    margin-top: 130px;
     color: white;
     background-color: #f073cd;
   }

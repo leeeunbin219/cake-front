@@ -99,11 +99,11 @@ const main = css`
     line-height: 15px;
   }
   .main_btn_container {
-    display: grid;
-    justify-content: center;
+    display: flex;
+    justify-content: space-evenly;
   }
   .main_btn {
-    width: 250px;
+    width: 150px;
     height: 45px;
     border-radius: 15px;
     border: none;

@@ -64,13 +64,13 @@ const login = css`
   .login_title {
     text-align: center;
     font-size: 55px;
-    margin-top: 13vh;
+    margin-top: 15vh;
     margin-bottom: 10vh;
     font-family: "Bazzi";
   }
 
   .login_btn_container {
-    margin-top: 5vh;
+    margin-top: 7vh;
   }
   .login_text_box {
     display: flex;
