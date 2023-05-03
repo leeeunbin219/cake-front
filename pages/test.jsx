@@ -1,128 +1,84 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter } from "next/router";
 
-import Link from "next/link";
-// export default function Test() {
-//   const [caketables, setCaketables] = useState([]);
-//   useEffect(() => {
-//     (async() => {
-//     const nickname = await (
-//         // await fetch(`https://manage.neokkukae.store/api/caketables/list/`
-//         await fetch(`http://127.0.0.1:8000/api/caketables/list/`
-//         )
-//       ).json();
-//       console.log(nickname)
-//     })();
-//   }, []);
-//   return (
-//     <div>
-//       {caketables.map((caketable) => <div>{caketable.nickname}</div>)}
-//     </div>
-//   )
-// }
-
-// export default function Test() {
-//   const [caketables, setCaketables] = useState([]);
-//   useEffect(() => {
-//     (async () => {
-//       const [data1, data2] = await (
-//         await fetch(`http://127.0.0.1:8000/api/caketables/list`)
-//       ).json();
-//       setCaketables(data2);
-//     })();
-//   }, []);
-//   return (
-//     <div>
-//       {!caketables && <h4>Loading..</h4>}
-//       {caketables?.map((caketable) => (
-//         <div key={caketable.user_pk}>
-//           <div>{caketable.nickname}</div>
-//           <div>{caketable.tablecolor}</div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
-// export default function Test({data2}) {
-//   const router = useRouter();
-//  const onClick = (pk) => {
-//   router.push(`/caketables/${pk}`);
-//  };
-//   return (
-//     <div>
-//       {data2?.map((caketable) => (
-
-// <div key={caketable.user_pk} onClick={()=>onClick(caketable.pk
-// )}>
-//       <div> <Link  href={`/caketable/${caketable.pk}`}><div>{caketable.nickname}</div></Link></div>
-//       <div>{caketable.tablecolor}</div>
-//       </div>
-//       ))}
-//     </div>
-//   );
-// }
-
-// export async function getServerSideProps() {
-//   const [data1, data2] = await (
-//     await fetch(`http://127.0.0.1:8000/api/caketables/list`)).json();
-//   return {
-//     props: {
-//       data2,
-//     },
-//   };
-// }
-
-export default function Test({ data2 }) {
+function CakeTablePage({ tables }) {
   const router = useRouter();
-  const onClick = (user_pk, nickname, tablecolor, total_visitor) => {
-    router.push(
-      {
-        pathname: `/caketables`,
-        query: {
-          nickname,
-          tablecolor,
-          total_visitor
-        },
-      },
-      `/caketables`
-    );
+  const { user_pk } = router.query;
+  const [currentPage, setCurrentPage] = useState(1);
+  const tablesPerPage = 8;
+  const totalPages = Math.ceil(tables.length / tablesPerPage);
+  const indexOfLastTable = currentPage * tablesPerPage;
+  const indexOfFirstTable = indexOfLastTable - tablesPerPage;
+  const currentTables = tables.slice(indexOfFirstTable, indexOfLastTable);
+
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
   };
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
   return (
     <div>
-      {data2?.map((caketable) => (
-        <div
-          onClick={() => onClick(caketable.user_pk, caketable.nickname, caketable.tablecolor, caketable.total_visitor)}
-          key={caketable.user_pk}
-        >
-          {/* <Link href={`/caketables/${caketable.user_pk}`}> */}
-          <Link
-            href={{
-              pathname: `/caketables/${caketable.user_pk}`,
-              query: {
-                nickname: caketable.nickname,
-                tablecolor: caketable.tablecolor,
-                total_visitor: caketable.total_visitor,
-              },
-            }}
-            as={`/caketables/${caketable.user_pk}`}
-          >
-            <div>{caketable.nickname}</div>
-            {/* <div>{caketable.tablecolor}</div> */}
-          </Link>
+      {currentTables.map((table) => (
+        <div key={table.user_pk}>
+          <p>{table.nickname}</p>
+          {table.visitors.map((visitor, index) => (
+            <div key={`${table.user_pk}-${index}`}>
+              <p>{visitor.visitor_name}</p>
+              <p>{visitor.pickcake}</p>
+              <p>{visitor.letter}</p>
+            </div>
+          ))}
         </div>
       ))}
+      <div>
+        {currentPage > 1 && (
+          <button onClick={handlePrevPage}>이전 페이지</button>
+        )}
+        {currentPage < totalPages && (
+          <button onClick={handleNextPage}>다음 페이지</button>
+        )}
+      </div>
     </div>
   );
 }
 
-export async function getServerSideProps() {
-  const [data1, data2] = await (
-    await fetch(`http://127.0.0.1:8000/api/caketables/list`)
-  ).json();
+export async function getStaticProps() {
+  // 데이터 가져오는 로직
+  useEffect(() => {
+    if (!user_pk) return;
+
+    fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCakeData(data[0]);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, [user_pk]);
+
+  // visitors 배열만 남기고 필터링
+  const filteredTables = tables.map(({ visitors, ...rest }) => ({
+    visitors,
+    ...rest,
+  }));
+
   return {
     props: {
-      data2,
+      tables: filteredTables,
     },
   };
 }
+
+export default CakeTablePage;
