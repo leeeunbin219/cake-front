@@ -75,7 +75,7 @@ export default function Main() {
       <p className="main_text">
         {cakeData.total_visitor}명이 축하메세지를 보냈습니다
       </p>
-      <p>0{cakeData.total_visitor}</p>
+      <p>0{cakeData.visitors}</p>
       <div style={style}>
         <Image src={Caketable} alt="caketableimg" width={500} height={450} />
       </div>
