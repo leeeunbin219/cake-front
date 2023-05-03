@@ -22,6 +22,11 @@ export default function Main() {
       console.error(error);
     }
   };
+  console.log(cakeData);
+  const handleClick = (event) => {
+    event.preventDefault();
+    router.push(`/caketables/${cakeData.user_pk}/cake`);
+  };
 
   useEffect(() => {
     if (!user_pk) return;
@@ -42,26 +47,28 @@ export default function Main() {
         console.error("Error:", error);
       });
   }, [user_pk]);
+
   const tableColor = cakeData.tablecolor;
   const style = {
-    backgroundColor: tableColor
+    backgroundColor: tableColor,
   };
-
   return (
     <div className="main_container">
       <Sidebar />
       <p className="main_text">{cakeData.nickname}님의 케이크</p>
-      <p className="main_text">{cakeData.total_visitor}명이 축하메세지를 보냈습니다</p>
+      <p className="main_text">
+        {cakeData.total_visitor}명이 축하메세지를 보냈습니다
+      </p>
       <div style={style}>
         <Image src={Caketable} alt="caketableimg" width={500} height={450} />
       </div>
       <FontAwesomeIcon icon={faAngleLeft} />
       <FontAwesomeIcon icon={faAngleRight} />
       <div className="main_btn_container">
-        <Link href="/Visitoruse">
-          <button className="main_btn">생일 축하해주기</button>
-        </Link>
-        <Link href="/Useruse">
+        <button className="main_btn" onClick={handleClick}>
+          생일 축하해주기
+        </button>
+        <Link href="/Login">
           <button className="main_btn">내 케이크 만들기</button>
         </Link>
         <button className="main_btn" onClick={copyURL}>

@@ -1,13 +1,39 @@
 import css from "styled-jsx/css";
 import Sidebar from "pages/components/Sidebar.jsx";
-import Cake_choice from  "./components/Cake_choice";
-import Letter from "./components/Letter";
-import { useState } from 'react'
+import Cake_choice from  "../../components/Cake_choice.jsx";
+import Letter from "../../components/Letter.jsx";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+
 
 export default function Visitoruse() {
+  const router = useRouter();
+  const { user_pk } = router.query;
+  const [cakeData, setCakeData] = useState({});
   const [visitor_name, setVisitor_name] = useState('');
   const [visitor_password, setPassword] = useState('');
   
+//user 닉네임 가져옴
+  useEffect(() => {
+    if (!user_pk) return;
+
+    fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setCakeData(data[0]);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, [user_pk]);
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -40,7 +66,7 @@ export default function Visitoruse() {
   return (
     <div className="visitoruse_container">
       <Sidebar />
-      <p className="visitoruse_text font">사용자님의 생일을 축하해주세요🎉</p>
+      <p className="visitoruse_text font">{cakeData.nickname}님의 생일을 축하해주세요🎉</p>
       <form onSubmit={handleFormSubmit}>
 
       <div className="visitoruse_nickname_password_container">
