@@ -18,6 +18,9 @@ export default function Sidebar() {
               <li>Login / Logout</li>
             </Link>
             <Link href="/" style={{ textDecoration: "none" }}>
+              <li>내 케이크 보기</li>
+            </Link>
+            <Link href="/" style={{ textDecoration: "none" }}>
               <li>서비스 소개</li>
             </Link>
             <Link href="/" style={{ textDecoration: "none" }}>

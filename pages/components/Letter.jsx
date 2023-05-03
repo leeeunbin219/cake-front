@@ -22,7 +22,7 @@ export default function Letter() {
       })
       .catch((error) => {
         console.error(error);
-        // Handle error here
+        // Handle error heregetRangeAt
       });
   };
 

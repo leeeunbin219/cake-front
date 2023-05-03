@@ -22,17 +22,12 @@ export default function Visitoruse() {
   const [cakeData, setCakeData] = useState({});
   const [visitor_name, setVisitor_name] = useState("");
   const [visitor_password, setPassword] = useState("");
-  const [letterContent, setLetterContent] = useState("");
+  const [letter, setLetter] = useState("");
   const [pickcake, setPickcake] = useState(null);
   const { user_pk } = router.query;
 
-  //케이크 선택
   const handleNicknameChange = (event) => {
     setVisitor_name(event.target.value);
-  };
-
-  const handleImageSelection = (imageId) => {
-    setPickcake(imageId);
   };
 
   //user 닉네임 가져옴
@@ -56,6 +51,38 @@ export default function Visitoruse() {
       });
   }, [user_pk]);
 
+  //케이크 선택
+  const handleImageSelection = (imageId) => {
+    setPickcake(imageId);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}/cake`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        visitor_name: visitor_name,
+        visitor_password: visitor_password,
+        pickcake: pickcake,
+        letter: letter,
+        // imageId,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <div className="visitoruse_container">
       <Sidebar />
@@ -63,10 +90,10 @@ export default function Visitoruse() {
         {cakeData.nickname}님의
         <br /> 생일을 축하해주세요🎉
       </p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="visitoruse_nickname_password_container">
           <div className="visitoruse_nickname_container">
-            <label for="nickname" className="visitoruse_name font">
+            <label htmlFor="nickname" className="visitoruse_name font">
               &nbsp;&nbsp;&nbsp;닉네임 &nbsp;
             </label>
             <input
@@ -79,7 +106,7 @@ export default function Visitoruse() {
             />
           </div>
           <div className="visitoruse_password_container">
-            <label for="password" className="visitoruse_name font">
+            <label htmlFor="password" className="visitoruse_name font">
               비밀번호 &nbsp;
             </label>
             <input
@@ -100,9 +127,9 @@ export default function Visitoruse() {
             type="radio"
             name="tabs"
             className="visitoruse_input"
-            checked
+            // checked
           />
-          <label for="tab1" className="visitoruse_label font">
+          <label htmlFor="tab1" className="visitoruse_label font">
             케이크 선택
           </label>
           <input
@@ -111,104 +138,109 @@ export default function Visitoruse() {
             name="tabs"
             className="visitoruse_input"
           />
-          <label for="tab2" className="visitoruse_label font">
+          <label htmlFor="tab2" className="visitoruse_label font">
             편지 쓰기
           </label>
           <section id="content1" className="visitoruse_secion">
             <div className="visitoruse_pinktable">
-              <Image src={Pinktable} width={500} />
+              <Image src={Pinktable} width={500} alt='cake'/>
               <div
                 className={pickcake === 1 ? "selected" : ""}
                 onClick={() => handleImageSelection(1)}
                 id="cake1"
               >
-                <Image src={cake1} width={100} height={100} />
+                <Image src={cake1} width={100} height={100} alt='cake' />
               </div>
               <div
                 className={pickcake === 2 ? "selected" : ""}
                 onClick={() => handleImageSelection(2)}
                 id="cake2"
               >
-                <Image src={cake2} width={100} height={100} />
+                <Image src={cake2} width={100} height={100} alt='cake'/>
               </div>
               <div
                 className={pickcake === 3 ? "selected" : ""}
                 onClick={() => handleImageSelection(3)}
                 id="cake3"
               >
-                <Image src={cake3} width={100} height={100} />
+                <Image src={cake3} width={100} height={100} alt='cake'/>
               </div>
               <div
                 className={pickcake === 4 ? "selected" : ""}
                 onClick={() => handleImageSelection(4)}
                 id="cake4"
               >
-                <Image src={cake4} width={100} height={100} />
+                <Image src={cake4} width={100} height={100} alt='cake'/>
               </div>
               <div
                 className={pickcake === 5 ? "selected" : ""}
                 onClick={() => handleImageSelection(5)}
                 id="cake5"
               >
-                <Image src={cake5} width={100} height={100} />
+                <Image src={cake5} width={100} height={100} alt='cake'/>
               </div>
               <div
                 className={pickcake === 6 ? "selected" : ""}
                 onClick={() => handleImageSelection(6)}
                 id="cake6"
               >
-                <Image src={cake6} width={100} height={100} />
+                <Image src={cake6} width={100} height={100} alt='cake'/>
               </div>
               <div
                 className={pickcake === 7 ? "selected" : ""}
                 onClick={() => handleImageSelection(7)}
                 id="cake7"
               >
-                <Image src={cake7} width={100} height={100} />
+                <Image src={cake7} width={100} height={100} alt='cake'/>
               </div>
               <div
                 className={pickcake === 8 ? "selected" : ""}
                 onClick={() => handleImageSelection(8)}
                 id="cake8"
               >
-                <Image src={cake8} width={100} height={100} />
+                <Image src={cake8} width={100} height={100} alt='cake'/>
               </div>
               <div
                 className={pickcake === 9 ? "selected" : ""}
                 onClick={() => handleImageSelection(9)}
                 id="cake9"
               >
-                <Image src={cake9} width={100} height={100} />
+                <Image src={cake9} width={100} height={100} alt='cake'/>
               </div>
               <div
                 className={pickcake === 10 ? "selected" : ""}
                 onClick={() => handleImageSelection(10)}
                 id="cake10"
               >
-                <Image src={cake10} width={100} height={100} />
+                <Image src={cake10} width={100} height={100} alt='cake'/>
               </div>
               <div
                 className={pickcake === 11 ? "selected" : ""}
                 onClick={() => handleImageSelection(11)}
                 id="cake11"
               >
-                <Image src={cake11} width={100} height={100} />
+                <Image src={cake11} width={100} height={100} alt='cake'/>
               </div>
               <div
                 className={pickcake === 12 ? "selected" : ""}
                 onClick={() => handleImageSelection(12)}
                 id="cake12"
               >
-                <Image src={cake12} width={100} height={100} />
+                <Image src={cake12} width={100} height={100} alt='cake'/>
               </div>
             </div>
           </section>
           <section id="content2" className="visitoruse_secion">
             <div className="visitoruse_text">
-              <textarea className="letter_textarea font" maxLength={50} />
+              <textarea
+                className="letter_textarea font"
+                maxLength={50}
+                value={letter}
+                onChange={(e) => setLetter(e.target.value)}
+              />
             </div>
             <button type="submit" className="useruse_submit_button font">
-              만들기
+              보내기
             </button>
           </section>
         </div>
