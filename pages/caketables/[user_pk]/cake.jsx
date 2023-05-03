@@ -23,6 +23,7 @@ export default function Visitoruse() {
   const [cakeData, setCakeData] = useState({});
   const [visitor_name, setVisitor_name] = useState("");
   const [visitor_password, setPassword] = useState("");
+  const [letterContent, setLetterContent] = useState("");
   const [pickcake, setPickcake] = useState(null);
 
   //케이크 선택

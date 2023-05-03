@@ -14,8 +14,8 @@ export default function Login() {
   
   const handleKakaoLogin = () => {
     // 로그인 페이지로 리디렉션
-    window.location.href = "http://127.0.0.1:8000/api/users/signin/kakao/";
-    // window.location.href = "https://manage.neokkukae.store/api/users/signin/kakao/"; // 수현 수정(배포용)
+    // window.location.href = "http://127.0.0.1:8000/api/users/signin/kakao/";
+    window.location.href = "https://manage.neokkukae.store/api/users/signin/kakao/"; // 수현 수정(배포용)
   };
   
   return (
