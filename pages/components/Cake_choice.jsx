@@ -39,6 +39,7 @@ export default function Cakechoice() {
         // Handle the error
       });
   };
+  
   return (
     <div>
       <Image src={Pinktable} width={500} />
