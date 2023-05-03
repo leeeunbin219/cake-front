@@ -71,11 +71,11 @@ export default function Main() {
   return (
     <div className="main_container">
       <Sidebar />
-      <p className="main_text">님의 케이크</p>
+      <p className="main_text">{cakeData.nickname}님의 케이크</p>
       <p className="main_text">
         {cakeData.total_visitor}명이 축하메세지를 보냈습니다
       </p>
-      <p>0{cakeData.visitors}</p>
+      <p>0{cakeData.visitor}</p>
       <div style={style}>
         <Image src={Caketable} alt="caketableimg" width={500} height={450} />
       </div>
