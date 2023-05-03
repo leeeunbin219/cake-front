@@ -58,7 +58,7 @@ export default function Visitoruse() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}/cake`, {
+    fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}/cake/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
