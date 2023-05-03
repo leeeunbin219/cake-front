@@ -19,12 +19,12 @@ import cake12 from "public/images/cakes/12.png";
 
 export default function Visitoruse() {
   const router = useRouter();
-  const { user_pk } = router.query;
   const [cakeData, setCakeData] = useState({});
   const [visitor_name, setVisitor_name] = useState("");
   const [visitor_password, setPassword] = useState("");
   const [letterContent, setLetterContent] = useState("");
   const [pickcake, setPickcake] = useState(null);
+  const { user_pk } = router.query;
 
   //케이크 선택
   const handleNicknameChange = (event) => {
@@ -33,13 +33,12 @@ export default function Visitoruse() {
 
   const handleImageSelection = (imageId) => {
     setPickcake(imageId);
-    };
-    
+  };
+
   //user 닉네임 가져옴
   useEffect(() => {
     if (!user_pk) return;
-
-    fetch(`https://manage.neokkukae.storev/api/caketables/${user_pk}`, {
+    fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -50,12 +49,12 @@ export default function Visitoruse() {
       })
       .then((data) => {
         setCakeData(data[0]);
+        console.log(cakeData);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   }, [user_pk]);
-
 
   return (
     <div className="visitoruse_container">
@@ -64,7 +63,7 @@ export default function Visitoruse() {
         {cakeData.nickname}님의
         <br /> 생일을 축하해주세요🎉
       </p>
-      <form >
+      <form>
         <div className="visitoruse_nickname_password_container">
           <div className="visitoruse_nickname_container">
             <label for="nickname" className="visitoruse_name font">
