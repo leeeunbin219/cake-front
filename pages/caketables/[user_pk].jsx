@@ -168,6 +168,7 @@ const main = css`
   .main_cakeImg {
     position: absolute;
     display: flex;
+    flex-flow: row wrap;
     width: 100%;
     top: 330px;
   }
