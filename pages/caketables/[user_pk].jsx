@@ -46,8 +46,8 @@ export default function Main() {
   useEffect(() => {
     if (!user_pk) return;
 
-    // fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}`, {
-    fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}`, {
+    fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}`, {
+    // fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -79,12 +79,12 @@ export default function Main() {
       <p className="main_text">
         {cakeData.total_visitor}명이 축하메세지를 보냈습니다
       </p>
-      {cakeData.visitors &&
-        cakeData.visitors.map((visitors, index) => {
-          console.log(visitors, index);
-          return (
-            <div key={visitors.id} id={visitors.id}>
-              <div className="pickcake1">
+      <div className="main_cakeImg">
+        {cakeData.visitors &&
+          cakeData.visitors.map((visitors, index) => {
+            console.log(visitors, index);
+            return (
+              <div className="pickcake" key={visitors.id} id={visitors.id}>
                 <Image
                   src={cake1}
                   height={100}
@@ -102,10 +102,9 @@ export default function Main() {
                   </div>
                 )}
               </div>
-            </div>
-          );
-        })}
-
+            );
+          })}
+      </div>
       <div style={style}>
         <Image src={Caketable} alt="caketableimg" width={500} height={450} />
       </div>
@@ -166,22 +165,18 @@ const main = css`
     margin-top: 10px;
     font-size: 15px;
   }
-  .pickcake1 {
-    /* position: absolute; */
-    /* right: 390px;
-    top: 330px; */
+  .main_cakeImg {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    top: 330px;
+  }
+  .pickcake {
+    margin-right: 30px;
   }
   .modal {
     height: 100px;
     width: 100px;
     background-color: black;
   }
-  /* .bgimg {
-    background-image: url("/images/Caketable.png");
-    background-size: 500px 450px;
-    background-repeat: no-repeat;
-    background-position: center;
-    /* width: 500px;
-    height: 450px; */
-  } */
 `;

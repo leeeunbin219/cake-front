@@ -33,8 +33,8 @@ export default function Visitoruse() {
   //user 닉네임 가져옴
   useEffect(() => {
     if (!user_pk) return;
-    // fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}`, {
-    fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}`, {
+    fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}`, {
+    // fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -59,8 +59,8 @@ export default function Visitoruse() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}/cake/`, {
-      fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/cake/`, {
+    fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}/cake/`, {
+      // fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/cake/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
