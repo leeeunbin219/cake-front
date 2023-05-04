@@ -44,8 +44,8 @@ export default function Useruse() {
       return;
     }
 
-    // fetch(`https://manage.neokkukae.store/api/caketables/new/`, {
-    fetch(`http://127.0.0.1:8000/api/caketables/new/`, {
+    fetch(`https://manage.neokkukae.store/api/caketables/new/`, {
+    // fetch(`http://127.0.0.1:8000/api/caketables/new/`, {
 
       method: "POST",
       headers: {
@@ -70,6 +70,7 @@ export default function Useruse() {
       })
       .catch((error) => {
         console.error("Error:", error);
+        alert("케이크는 하나만 생성이 가능합니다.");
       });
   };
 

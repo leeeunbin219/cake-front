@@ -46,8 +46,8 @@ export default function Main() {
   useEffect(() => {
     if (!user_pk) return;
 
-    // fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}`, {
-    fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}`, {
+    fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}`, {
+    // fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -177,6 +177,7 @@ const main = css`
   .modal {
     height: 100px;
     width: 100px;
-    background-color: black;
-  }
+    background-color: #ffffff;
+    color: black;
+      }
 `;
