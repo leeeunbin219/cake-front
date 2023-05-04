@@ -25,7 +25,7 @@ export default function Footer() {
 }
 
 const footer = css`
- @font-face {
+  @font-face {
     font-family: "Bazzi";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
       format("woff");
@@ -39,7 +39,6 @@ const footer = css`
     text-align: left;
     margin-left: -15px;
     font-family: "Bazzi";
-
   }
   .footer_text {
     color: black;
