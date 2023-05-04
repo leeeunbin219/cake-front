@@ -80,7 +80,7 @@ export default function Main() {
         {cakeData.total_visitor}명이 축하메세지를 보냈습니다
       </p>
       <div className="main_cakeImg">
-        {cakeData.visitors &&
+        {/* {cakeData.visitors &&
           cakeData.visitors.map((visitors, index) => {
             console.log(visitors, index);
             return (
@@ -103,7 +103,7 @@ export default function Main() {
                 )}
               </div>
             );
-          })}
+          })} */}
       </div>
       <div style={style}>
         <Image src={Caketable} alt="caketableimg" width={500} height={450} />
